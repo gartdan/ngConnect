@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "description": "Demo Angular2 project",
   "readme": "README.md",
-  "main": "server.js",
+  "repository": {
+    "type" : "git",
+    "url" : "https://github.com/billti/ngConnect.git"
+  },
   "dependencies": {
     "angular2": "^2.0.0-alpha.40",
     "express": "^4.13.3",
