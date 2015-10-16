@@ -1,3 +1,4 @@
+/// <reference path="../../node_modules/angular2/bundles/typings/es6-shim/es6-shim.d.ts"/>
 /// <reference path="../../node_modules/angular2/bundles/typings/angular2/angular2.d.ts"/>
 var __extends = (this && this.__extends) || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];

@@ -11,4 +11,7 @@ define(["require", "exports", "angular2/angular2", "./app"], function (require, 
         return Bill;
     })();
     exports.Bill = Bill;
+    var a1;
+    var a2;
+    var b = mixin(a1, a2);
 });

@@ -4,11 +4,11 @@
   "description": "Demo Angular2 project",
   "readme": "README.md",
   "repository": {
-    "type" : "git",
-    "url" : "https://github.com/billti/ngConnect.git"
+    "type": "git",
+    "url": "https://github.com/billti/ngConnect.git"
   },
   "dependencies": {
-    "angular2": "^2.0.0-alpha.40",
+    "angular2": "^2.0.0-alpha.42",
     "express": "^4.13.3",
     "react": "^0.13.0",
     "systemjs": "^0.19.4"
