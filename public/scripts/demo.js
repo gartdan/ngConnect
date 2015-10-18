@@ -2,7 +2,7 @@ var ng = require("angular2/angular2");
 var app_1 = require("./app");
 var x = ng.Component;
 var name = "MyApp";
-var f = new app_1.ItemList();
+var f = new app_1.ItemList(null);
 f.name = "test";
 var Bill = (function () {
     function Bill() {

@@ -4,7 +4,7 @@ import {ItemList} from "./app";
 var x = ng.Component;
 var name = "MyApp";
 
-var f = new ItemList();
+var f = new ItemList(null);
 f.name = "test";
 
 export class Bill {

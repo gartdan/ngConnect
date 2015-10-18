@@ -2,27 +2,41 @@
 
 import * as React from "react";
 
-export interface GreeterProps extends React.Props<Greeter> {
+export interface GreeterProps extends React.Props<Shipping> {
 	size: number;
-	whomToGreet: string;
-	greeting?: string | (() => string);
+	changed: any;
 }
 
-export class Greeter extends React.Component<GreeterProps, {}> {
+let deliveryOptions: Array<[string, number, number]> = [
+	["Standard", 4.95, 100],
+	["Two days", 10, 50],
+	["Overnight", 19.95, 10]
+];
+
+export class Shipping extends React.Component<GreeterProps, {shipPrice: number, shipWeight: number}> {
+	constructor(){
+		super();
+		this.state = { shipPrice: 4.95, shipWeight: 0 };
+	}
+
 	render() {
-		let g = this.props.greeting;
+		return <div >
+			Delivery method: <select onChange={(evt) => this.update(evt)}>{
+				deliveryOptions.map((opt, idx) => <option key={idx}>{opt[0]}</option>)
+			}</select>
+			<br/>
+			<div>Weight: <b>{this.state.shipWeight}lb</b></div>
+			<div>Cost: <b>{"$" + this.state.shipPrice.toFixed(2) }</b></div>
+		</div>;
+	}
 
-		let greeting = 'Hello';
-		if (typeof g === 'string') {
-			greeting = g;
-		} else if (g) {
-			greeting = g();
-		}
-
-		return <div>{ greeting }, { this.props.whomToGreet }</div>;
+	update(evt){
+		let idx = evt.target.selectedIndex;
+		this.setState({ shipPrice: deliveryOptions[idx][1]} as any);
+		this.props.changed(deliveryOptions[idx][2]);
 	}
 }
 
-export function showGreeting(elem: Element, size: number, who: string) {
-	React.render(<Greeter size={size} whomToGreet={who}/>, elem);
+export function showShipping(elem: Element, size: number, changed: Function) {
+	return React.render(<Shipping size={size} changed={changed}/>, elem);
 }
