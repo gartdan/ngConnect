@@ -12,7 +12,7 @@ var setMaxWeight = (x) => null;
     <span  class="itemWeight">{{format(item.price)}}</span>
     <input class="itemAmount" type="number" min="0" max="200" [(ng-model)]="item.amount"/>
     <span  class="itemTotal">{{format(item.price * item.amount)}}</span>
-    <span  class="itemOver" *ng-if="(1 * item.amount) > weightLimit">Overweight for shipping method!</span>
+    <span  class="itemOver" *ng-if="item.amount > weightLimit">Overweight for shipping method!</span>
   </li>
   <li>
     <span class="totalText">Total</span><span class="itemsTotal">{{getTotal()}}</span>
@@ -44,7 +44,7 @@ export class ItemList {
 
     getTotal() {
         let totalPrice = this.items.reduce((prev, curr) => prev + curr.amount * curr.price, 0);
-        let totalWeight = this.items.reduce((prev, curr) => prev + 1 * curr.amount, 0);
+        let totalWeight = this.items.reduce((prev, curr) => prev + curr.amount, 0);
         shipping.setState({shipWeight: totalWeight})
         return this.format(totalPrice);
     }

@@ -30,14 +30,14 @@ var ItemList = (function () {
     };
     ItemList.prototype.getTotal = function () {
         var totalPrice = this.items.reduce(function (prev, curr) { return prev + curr.amount * curr.price; }, 0);
-        var totalWeight = this.items.reduce(function (prev, curr) { return prev + 1 * curr.amount; }, 0);
+        var totalWeight = this.items.reduce(function (prev, curr) { return prev + curr.amount; }, 0);
         shipping.setState({ shipWeight: totalWeight });
         return this.format(totalPrice);
     };
     ItemList = __decorate([
         ng.Component({
             selector: "item-list",
-            template: "\n<ul class=\"itemList\">\n  <li *ng-for='#item of items'>\n    <span  class=\"itemName\">{{item.name}}</span>\n    <span  class=\"itemWeight\">{{format(item.price)}}</span>\n    <input class=\"itemAmount\" type=\"number\" min=\"0\" max=\"200\" [(ng-model)]=\"item.amount\"/>\n    <span  class=\"itemTotal\">{{format(item.price * item.amount)}}</span>\n    <span  class=\"itemOver\" *ng-if=\"(1 * item.amount) > weightLimit\">Overweight for shipping method!</span>\n  </li>\n  <li>\n    <span class=\"totalText\">Total</span><span class=\"itemsTotal\">{{getTotal()}}</span>\n  </li>\n  <span><i>Max weight per item for shipping method: {{weightLimit}}</i></span>\n</ul>\n",
+            template: "\n<ul class=\"itemList\">\n  <li *ng-for='#item of items'>\n    <span  class=\"itemName\">{{item.name}}</span>\n    <span  class=\"itemWeight\">{{format(item.price)}}</span>\n    <input class=\"itemAmount\" type=\"number\" min=\"0\" max=\"200\" [(ng-model)]=\"item.amount\"/>\n    <span  class=\"itemTotal\">{{format(item.price * item.amount)}}</span>\n    <span  class=\"itemOver\" *ng-if=\"item.amount > weightLimit\">Overweight for shipping method!</span>\n  </li>\n  <li>\n    <span class=\"totalText\">Total</span><span class=\"itemsTotal\">{{getTotal()}}</span>\n  </li>\n  <span><i>Max weight per item for shipping method: {{weightLimit}}</i></span>\n</ul>\n",
             directives: [ng.CORE_DIRECTIVES, ng.FORM_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [ng.ChangeDetectorRef])
