@@ -1,48 +1,41 @@
-/// <reference path="../../node_modules/angular2/bundles/typings/es6-shim/es6-shim.d.ts"/>
-/// <reference path="../../node_modules/angular2/bundles/typings/angular2/angular2.d.ts"/>
-var __extends = (this && this.__extends) || function (d, b) {
-    for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
-    function __() { this.constructor = d; }
-    d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-};
 var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") return Reflect.decorate(decorators, target, key, desc);
-    switch (arguments.length) {
-        case 2: return decorators.reduceRight(function(o, d) { return (d && d(o)) || o; }, target);
-        case 3: return decorators.reduceRight(function(o, d) { return (d && d(target, key)), void 0; }, void 0);
-        case 4: return decorators.reduceRight(function(o, d) { return (d && d(target, key, o)) || o; }, desc);
-    }
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
 };
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-define(["require", "exports", "angular2/angular2", "./shipping"], function (require, exports, ng, shipping_1) {
-    var Foo = (function () {
-        function Foo() {
-        }
-        Foo.prototype.sayHi = function () {
-            console.log("Hi");
-        };
-        return Foo;
-    })();
-    var MyComponent = (function (_super) {
-        __extends(MyComponent, _super);
-        function MyComponent() {
-            _super.call(this);
-            this.name = "Bill";
-        }
-        MyComponent = __decorate([
-            ng.Component({
-                selector: "my-app"
-            }),
-            ng.View({
-                template: "<b>Hello {{name}}</b>"
-            }), 
-            __metadata('design:paramtypes', [])
-        ], MyComponent);
-        return MyComponent;
-    })(Foo);
-    exports.MyComponent = MyComponent;
-    ng.bootstrap(MyComponent);
-    shipping_1.displayGreeting(document.getElementById('greeting'), 10, "Bill");
-});
+var ng = require("angular2/angular2");
+var shipping_1 = require("./shipping");
+var ItemList = (function () {
+    function ItemList() {
+        this.items = [
+            { name: 'Apples', price: 4.95, amount: 0 },
+            { name: 'Bananas', price: 2.50, amount: 0 },
+            { name: 'Cherries', price: 9.00, amount: 0 }];
+        this.name = "Bill";
+    }
+    ItemList.prototype.format = function (amount) {
+        return "$" + amount.toFixed(2);
+    };
+    ItemList.prototype.getTotal = function () {
+        var total = this.items.reduce(function (prev, curr, idx, arr) {
+            return prev + curr.amount * curr.price;
+        }, 0);
+        return this.format(total);
+    };
+    ItemList = __decorate([
+        ng.Component({
+            selector: "item-list",
+            template: "\n<ul class=\"itemList\">\n  <li *ng-for='#item of items'>\n    <span  class=\"itemName\">{{item.name}}</span>\n    <span  class=\"itemWeight\">{{format(item.price)}}</span>\n    <input class=\"itemAmount\" type=\"number\" min=\"0\" max=\"20\" [(ng-model)]=\"item.amount\"/>\n    <span  class=\"itemTotal\">{{format(item.price * item.amount)}}</span>\n  </li>\n  <li>\n    <span class=\"totalText\">Total</span><span class=\"itemsTotal\">{{getTotal()}}</span>\n  </li>\n</ul>\n",
+            directives: [ng.NgFor, ng.FORM_DIRECTIVES]
+        }), 
+        __metadata('design:paramtypes', [])
+    ], ItemList);
+    return ItemList;
+})();
+exports.ItemList = ItemList;
+ng.bootstrap(ItemList);
+shipping_1.showGreeting(document.getElementById('greeting'), 10, "Bill");

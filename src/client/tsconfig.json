@@ -1,10 +1,11 @@
 {
     "compilerOptions": {
-        "module": "amd",
+        "module": "commonjs",
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
         "target": "es5",
         "jsx": "react",
-        "outDir": "../../public/scripts"
+        "outDir": "../../public/scripts",
+        "noImplicitAny": false
     }
 }

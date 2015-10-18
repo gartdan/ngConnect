@@ -1,10 +1,10 @@
 import * as ng from "angular2/angular2";
-import {MyComponent} from "./app";
+import {ItemList} from "./app";
 
 var x = ng.Component;
 var name = "MyApp";
 
-var f = new MyComponent();
+var f = new ItemList();
 f.name = "test";
 
 export class Bill {

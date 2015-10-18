@@ -1,30 +1,46 @@
-/// <reference path="../../node_modules/angular2/bundles/typings/es6-shim/es6-shim.d.ts"/>
-/// <reference path="../../node_modules/angular2/bundles/typings/angular2/angular2.d.ts"/>
-
 import * as ng from "angular2/angular2";
-import {displayGreeting} from "./shipping";
-
-class Foo {
-    sayHi(){
-        console.log("Hi");
-    }
-}
+import {showGreeting} from "./shipping";
 
 @ng.Component({
-    selector: "my-app"
+    selector: "item-list",
+    template: `
+<ul class="itemList">
+  <li *ng-for='#item of items'>
+    <span  class="itemName">{{item.name}}</span>
+    <span  class="itemWeight">{{format(item.price)}}</span>
+    <input class="itemAmount" type="number" min="0" max="20" [(ng-model)]="item.amount"/>
+    <span  class="itemTotal">{{format(item.price * item.amount)}}</span>
+  </li>
+  <li>
+    <span class="totalText">Total</span><span class="itemsTotal">{{getTotal()}}</span>
+  </li>
+</ul>
+`,
+    directives: [ng.NgFor, ng.FORM_DIRECTIVES]
 })
-@ng.View({
-    template: `<b>Hello {{name}}</b>`
-})
-export class MyComponent extends Foo {
+export class ItemList {
     name: string;
+    items = [
+        {name: 'Apples', price: 4.95, amount: 0 }, 
+        {name: 'Bananas', price: 2.50, amount: 0 }, 
+        {name: 'Cherries', price: 9.00, amount: 0 } ];
 
     constructor(){
-        super();
         this.name = "Bill";
+    }
+
+    format(amount: number){
+        return "$" + amount.toFixed(2);
+    }
+
+    getTotal(){
+        let total = this.items.reduce((prev, curr, idx, arr) => {
+            return prev + curr.amount * curr.price;
+        }, 0);
+        return this.format(total);
     }
 }
 
-ng.bootstrap(MyComponent);
+ng.bootstrap(ItemList);
 
-displayGreeting(document.getElementById('greeting'), 10, "Bill");
+showGreeting(document.getElementById('greeting'), 10, "Bill");

@@ -23,6 +23,6 @@ export class Greeter extends React.Component<GreeterProps, {}> {
 	}
 }
 
-export function displayGreeting(elem: Element, size: number, who: string) {
+export function showGreeting(elem: Element, size: number, who: string) {
 	React.render(<Greeter size={size} whomToGreet={who}/>, elem);
 }

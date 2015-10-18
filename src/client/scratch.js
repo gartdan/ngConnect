@@ -11,7 +11,6 @@ function deliveryMethod() {
 }
 
 function shipWeight(){
-    var req = new XMLHttpRequest();
     var weight = parseInt(document.getElementById('weight'));
 
     // Show the on screen warning for heavy items
