@@ -12,8 +12,11 @@ function readFile(filename){
 }
 
 function* getfiles(){
+	yield '../node_modules/angular2/bundles/angular2.dev.js';
 	yield "/temp/file1.txt";
+	yield '../node_modules/angular2/bundles/http.dev.js';
 	yield "/temp/file2a.txt";
+	yield '../node_modules/angular2/bundles/router.dev.js';
 	yield "/temp/file2.txt";
 }
 
@@ -34,3 +37,17 @@ async function run() {
 }
 
 run();
+
+async function parallel_run(){
+	var work = [];
+	for (let file of getfiles()) {
+		let prom = readFile(file).then(
+			data => { logWords(file, data) },
+			err => { console.log(`Failed to read file "${file}" with error: ${err}`); }
+		);
+		work.push(prom);
+	}
+	console.log("Done");
+}
+
+//parallel_run();

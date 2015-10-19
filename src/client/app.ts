@@ -17,8 +17,8 @@ var setMaxWeight = (x) => null;
   <li>
     <span class="totalText">Total</span><span class="itemsTotal">{{getTotal()}}</span>
   </li>
-  <span><i>Max weight per item for shipping method: {{weightLimit}}</i></span>
 </ul>
+<div><i>Max weight per item for shipping method: {{weightLimit}}</i></div>
 `,
     directives: [ng.CORE_DIRECTIVES, ng.FORM_DIRECTIVES]
 })
