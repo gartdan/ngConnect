@@ -2,7 +2,7 @@
 
 import * as React from "react";
 
-export interface GreeterProps extends React.Props<Shipping> {
+export interface ShippingProps extends React.Props<Shipping> {
 	size: number;
 	changed: any;
 }
@@ -13,7 +13,7 @@ let deliveryOptions: Array<[string, number, number]> = [
 	["Overnight", 19.95, 10]
 ];
 
-export class Shipping extends React.Component<GreeterProps, {shipPrice: number, shipWeight: number}> {
+export class Shipping extends React.Component<ShippingProps, {shipPrice: number, shipWeight: number}> {
 	constructor(){
 		super();
 		this.state = { shipPrice: 4.95, shipWeight: 0 };

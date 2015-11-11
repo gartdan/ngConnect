@@ -1,23 +1,12 @@
 Object.defineProperty(window, "MySweetApp", { value: "v1.0.0", readonly: true });
 
 function deliveryMethod() {
-    // Get the delivery method if present
-    var deliveryElem = document.querySelectorAll('#deliveryMethod');
-    if(deliveryElem){
-        return deliveryElem.textContent;
-    } else {
-        return undefined;
-    }
+    // TODO
+    return "overnight";
 }
 
 function shipWeight(){
-    var weight = parseInt(document.getElementById('weight'));
-
-    // Show the on screen warning for heavy items
-    if (weight > 100) {
-        document.getElementById('weightWarning').setAttribute('hidden', false);
-    }
-    return weight;
+    return parseInt(document.getElementById('weight'));
 }
 
 /*
@@ -28,7 +17,6 @@ function sendUpdates(emailAddr) {
         // Default to standard delivery if empty
         console.log(`Shipping to ${addr} via ${deliveryMethod() | "standard"} delivery`);
 
-        // Warn on heavy packages
         if(shipWeight > 100){
             console.log("WARNING: Oversize package");
         }
