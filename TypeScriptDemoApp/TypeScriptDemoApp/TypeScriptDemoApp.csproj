@@ -31,7 +31,8 @@
     <Content Include="public\scripts\app.js" />
     <Content Include="public\scripts\demo.js" />
     <Content Include="public\scripts\shipping.js" />
-    <Content Include="src\client\scratch.js" />
+    <TypeScriptCompile Include="src\client\scratch.ts" />
+    <Content Include="server.js" />
     <Content Include="web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -39,6 +40,8 @@
     <TypeScriptCompile Include="src\client\app.ts" />
     <TypeScriptCompile Include="src\client\demo.ts" />
     <TypeScriptCompile Include="src\client\shipping.tsx" />
+    <TypeScriptCompile Include="src\client\validation.ts" />
+    <TypeScriptCompile Include="src\client\ZipCodeValidator.ts" />
     <TypeScriptCompile Include="src\server\runtime.ts" />
     <TypeScriptCompile Include="src\typings\node.d.ts" />
     <TypeScriptCompile Include="src\typings\react.d.ts" />
@@ -46,6 +49,8 @@
   <ItemGroup>
     <Content Include="src\client\tsconfig.json" />
     <Content Include="src\server\tsconfig.json" />
+    <Content Include="package.json" />
+    <Content Include="README.md" />
     <None Include="web.Debug.config">
       <DependentUpon>web.config</DependentUpon>
     </None>
@@ -82,6 +87,17 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
     <TypeScriptRemoveComments>false</TypeScriptRemoveComments>
     <TypeScriptSourceMap>true</TypeScriptSourceMap>
+    <TypeScriptTarget>ES6</TypeScriptTarget>
+    <TypeScriptJSXEmit>React</TypeScriptJSXEmit>
+    <TypeScriptCompileOnSaveEnabled>True</TypeScriptCompileOnSaveEnabled>
+    <TypeScriptNoImplicitAny>False</TypeScriptNoImplicitAny>
+    <TypeScriptModuleKind>AMD</TypeScriptModuleKind>
+    <TypeScriptOutFile />
+    <TypeScriptOutDir />
+    <TypeScriptGeneratesDeclarations>False</TypeScriptGeneratesDeclarations>
+    <TypeScriptNoEmitOnError>True</TypeScriptNoEmitOnError>
+    <TypeScriptMapRoot />
+    <TypeScriptSourceRoot />
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Release'">
     <TypeScriptRemoveComments>true</TypeScriptRemoveComments>
